@@ -5,9 +5,10 @@ import CollapsibleTable from './CollapsibleTable'
 
 
 const PreviewCompClient = (props) => {
+
     return (
         <div className='container'>
-            <CollapsibleTable cases={props.allCases} casesType={props.allCaseTypes} loginType={props.loginType} />
+            <CollapsibleTable setRenderAllCases={props.setRenderAllCases} cases={props.allCases} casesType={props.allCaseTypes} loginType={props.loginType} />
         </div>
         )
 }

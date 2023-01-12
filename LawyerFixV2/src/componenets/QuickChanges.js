@@ -96,6 +96,8 @@ const QuickChanges = (props) => {
       },
     }
     ])
+    props.setRenderAllCases(true) 
+
   }
 
   const writeMessage = () => {
@@ -105,6 +107,8 @@ const QuickChanges = (props) => {
     update(ref(db, plaster), {
       [len]: { Role: newLaywerMessage.Role, Message: newLaywerMessage.Message }
     })
+    props.setRenderAllCases(true) 
+    alert("הודעה נשלחה בהצלחה")
   }
 
   const caseTypeList = Object.entries(props.currCaseTypeDetails)
@@ -115,6 +119,7 @@ const QuickChanges = (props) => {
     let plaster = 'Cases/' + props.CaseNum;
     remove(ref(db, plaster))
     props.setRenderAllCases(true)
+    alert("תיק נמחק בהצלחה")
   }
   function updateCase() {
     const db = getDatabase();

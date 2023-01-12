@@ -1,5 +1,5 @@
-
 import * as React from 'react';
+import { useState , useEffect } from 'react'
 import '../index.css';
 import PreviewCompClient from './PreviewCompClient';
 import { onValue, ref, set, getDatabase, child, get } from "firebase/database";
@@ -15,6 +15,8 @@ const ClientDashboard = (props) => {
   const [allUsers, setAllUsers] = React.useState([]);
   const [flag, setFlag] = React.useState(true)
   const [myUserName, setMyUserName] = React.useState([])
+  const [renderAllCases, setRenderAllCases] = React.useState(false);
+
 
 
   const GetAllUsersFromDB = React.useCallback(() => {
@@ -78,12 +80,20 @@ const ClientDashboard = (props) => {
     GetAllUsersFromDB()
     setFlag(false)
   }
+  useEffect(() => {
+    if (props.renderAllCases) {
+        GetAllCasesFromDB()
+        GetAllCaseTypeFromDB()
+        GetAllUsersFromDB()
+        props.setRenderAllCases(false)
+    }
+}, [props.renderAllCases]);
 
   return (
 
     <div>
       <UserView myUserName={myUserName} setConnected={props.setConnected} setUserUID={props.setUserUID} setloginType={props.setloginType} />
-      <PreviewCompClient allCases={allCases} clientReq={allClientReq} allCaseTypes={allCasesType} handlingLawyer={handlingLawyer} allUsers={allUsers} loginType={props.loginType} />
+      <PreviewCompClient setRenderAllCases={setRenderAllCases} allCases={allCases} clientReq={allClientReq} allCaseTypes={allCasesType} handlingLawyer={handlingLawyer} allUsers={allUsers} loginType={props.loginType} />
     </div>
 
   )
