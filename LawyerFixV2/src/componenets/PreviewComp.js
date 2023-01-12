@@ -21,6 +21,7 @@ const PreviewComp = (props) => {
     const [previewCases,setPreviewCases] = React.useState(props.allCases);
     const [previewReqIndex,setPreviewReqIndex] = React.useState(0);
     const [previewRequests,setPreviewRequests] = React.useState(props.myRequests);
+    const [searchCases,setSearchCases] = React.useState([])
 
      //OnClick in Navigation conponent -> change the previewIndex 
   const changeIndex = (e,index) => {
@@ -38,23 +39,14 @@ const PreviewComp = (props) => {
 
   },[props.allCases])
 
-//   useEffect(()=>{
-//     const c = Object.entries(props.myRequests)
-//     const myRequests = c.map((item) => item[1])
-//     console.log("use effect my requests")
-//     console.log(myRequests)
-//     setPreviewRequests(myRequests)
 
-//   },[props.myRequests])
 
 
     if(props.preview === 0){
-        console.log("כל סוגי התיקים 0")
-        console.log(props.allCaseTypes)
         return (
             <div className='container'>
                 <Title title={"תיקים"}/>
-                <NavigateTable onClick={changeIndex} allCases={props.allCases} activeCases={props.activeCases} myCases={props.myCases} myActiveCases={props.myActiveCases} setPreviewCases={setPreviewCases} loginType={props.loginType}/>
+                <NavigateTable previewCases={previewCases} onClick={changeIndex} allCases={props.allCases} activeCases={props.activeCases} myCases={props.myCases} myActiveCases={props.myActiveCases} setPreviewCases={setPreviewCases} loginType={props.loginType} setSearchCases={setSearchCases} previewIndex={previewIndex}/>
                 <PreviewTable setRenderAllCases={props.setRenderAllCases} preview={previewIndex} cases={previewCases} casesType={props.allCaseTypes} loginType={props.loginType} />
             </div>
           )
@@ -102,19 +94,7 @@ const PreviewComp = (props) => {
 
     }
 
-  //   else if(props.preview===6){
-       
-  //     return (
-  //         <div className='container'>
-  //             <Title title={"בקשות לקוח"}/>
-  //             <NavigateRequests onClick={changeReqIndex} loginType={props.loginType} allClientReq={props.allClientReq} myRequests={props.myRequests} setPreviewRequests={setPreviewRequests} />
-  //             <PreviewRequestsTable previewRequests={previewRequests}/>
-  //             {/* <LawyerRequests Requests={c}/> */}
-  //         </div>
-  //       )
-
-  // }
-
+  
     else{
         return (
             <div className='container'>
