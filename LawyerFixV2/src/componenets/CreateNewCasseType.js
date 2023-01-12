@@ -10,21 +10,18 @@ const CreateNewCaseType = () => {
     const [StageFormList, SetStageFormList] = useState([]); // list of BoxForms
     const [StageIndex, SetStageIndex] = useState(1);
 
-
-
-
-    const onAddStage = ({event}) => {
+    const onAddStage = ({ event }) => {
         SetStageFormList(StageFormList.concat(
-            <Description key={StageIndex} index ={StageIndex} onChange={handleStage}/>
+            <Description key={StageIndex} index={StageIndex} onChange={handleStage} />
         ))
         const listCpt = StageList
         listCpt.push(Stage)
         SetStageList(listCpt)
-        SetStageIndex(StageIndex+1)
+        SetStageIndex(StageIndex + 1)
         console.log(StageList)
     }
 
-    const onDoneClick = ({event}) => {
+    const onDoneClick = ({ event }) => {
         writeUserData();
         SetStage('')
         SetCaseType('')
@@ -35,50 +32,50 @@ const CreateNewCaseType = () => {
 
     const handleCaseType = (event) => {
         SetCaseType(event.target.value);
-      };
+    };
 
-    const handleStage = (event,stageNum) => {
+    const handleStage = (event, stageNum) => {
         console.log("here" + stageNum);
         const listCpt = StageList
-        listCpt[stageNum-1]=event.target.value
+        listCpt[stageNum - 1] = event.target.value
         SetStageList(listCpt)
-        };
-        
-      function writeUserData() {
+    };
+
+    function writeUserData() {
         const db = getDatabase();
         set(ref(db, `CaseType/${CaseType}`), {
-            1 : StageList[0],
+            1: StageList[0],
         });
         for (let i = 1; i < StageList.length; i++) {
             update(ref(db, `CaseType/${CaseType}`), {
-                [i+1] : StageList[i],
+                [i + 1]: StageList[i],
             });
-            
-        }   
-}
-    
-   
-  return (
-    <div style={{textAlign:'center'}}>
-        <div className="caseType-input">
-            <label style={{fontSize:'17px',fontWeight:'bold',color:'#523A28'}}>שם סוג התיק</label>
-            <input  type='text'
-             placeholder='הכנס/י שם סוג התיק' 
-             style={{marginRight:'10px',width:'33%',height:'30px',borderRadius:'10px'}}
-             onChange={handleCaseType}
-             value={CaseType}
-             />
-        </div>
-        {StageFormList}
-        <div style={{display:'inline-grid'}}>
-            <button onClick={onAddStage} className="btn-casetype" style={{marginTop:'25px'}}>הוסף תיאור</button>
-            <button onClick={onDoneClick} className="btn-casetype">שמור</button>
-        </div>
-        
-    </div>
 
-    
-  )
+        }
+    }
+
+
+    return (
+        <div style={{ textAlign: 'center' }}>
+            <div className="caseType-input">
+                <label style={{ fontSize: '17px', fontWeight: 'bold', color: '#523A28' }}>שם סוג התיק</label>
+                <input type='text'
+                    placeholder='הכנס/י שם סוג התיק'
+                    style={{ marginRight: '10px', width: '33%', height: '30px', borderRadius: '10px' }}
+                    onChange={handleCaseType}
+                    value={CaseType}
+                />
+            </div>
+            {StageFormList}
+            <div style={{ display: 'inline-grid' }}>
+                <button onClick={onAddStage} className="btn-casetype" style={{ marginTop: '25px' }}>הוסף תיאור</button>
+                <button onClick={onDoneClick} className="btn-casetype">שמור</button>
+            </div>
+
+        </div>
+
+
+    )
 }
 
 export default CreateNewCaseType

@@ -31,7 +31,6 @@ const NewMessage = (props) => {
         onChange={e => setInputValue(e.target.value)}
         style={{ display: 'inline-block' , width:'80%', height:'20px' , marginLeft:'10px' }}
       />
-      {/* <button style={{ display: 'inline-block' }}>הגב</button> */}
       <div style={{display:"inline-block"}}>
       <Tooltip title="שלח">
           <ArrowCircleLeftIcon style={{ display:'inline-block' , fontSize:'large' , marginTop:'15px'}} onClick={updateMessage} />

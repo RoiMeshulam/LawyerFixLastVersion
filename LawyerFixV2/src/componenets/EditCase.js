@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import EdittedCase from './EdittedCase';
-import { ChevronLeft } from '@mui/icons-material';
 
 
-const EditCase = ({ allCases, currCaseTypeDetails}) => {
+const EditCase = ({ allCases, currCaseTypeDetails }) => {
     const [caseId, setCaseId] = React.useState('');
     const [currCaseDetails, setCurrCaseDetails] = React.useState();
     const [showCase, setShowCase] = useState(true);
@@ -46,7 +45,6 @@ const EditCase = ({ allCases, currCaseTypeDetails}) => {
                         <button onClick={FilterCurrCase} className="btn-casetype" style={{ marginTop: '20px', width: '100%' }}>חפש</button>
                     </div>
 
-                    {/* <Button onClick={FilterCurrCase}>חפש</Button> */}
                 </div>
                 :
                 <div>

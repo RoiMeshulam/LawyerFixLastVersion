@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { child, get, getDatabase, ref, set } from "firebase/database";
-import { Select, MenuItem, Box, Grid } from '@mui/material';
+import { Select, MenuItem } from '@mui/material';
 import styled from '@emotion/styled';
 import AddUser from './AddUser';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import Autocomplete from '@mui/material/Autocomplete';
 
 // FormControl
 
@@ -19,7 +18,7 @@ const FormControler = styled(FormControl)({
     }
 })
 
-const CreateNewCase = ({ currCaseTypeDetails, currUsers, userUID}) => {
+const CreateNewCase = ({ currCaseTypeDetails, currUsers, userUID }) => {
     const [newCaseNum, setNewCaseNum] = useState('');
     const [newClientName, setNewClinetName] = useState('');
     const [newClinetUID, setNewClinetUID] = useState();
@@ -53,11 +52,11 @@ const CreateNewCase = ({ currCaseTypeDetails, currUsers, userUID}) => {
     const allusersList = Object.values(currUsers)
     const usersList = allusersList.filter(item => item.Role === "User")
     const getUserUID = () => {
-        if(newClinetUID){alert("Already got user")}
-        else{
-        let fullUserObj = Object.entries(currUsers)
-        fullUserObj = fullUserObj.filter(item => item[1].Name === newClientName)
-        setNewClinetUID(fullUserObj[0][0])
+        if (newClinetUID) { alert("Already got user") }
+        else {
+            let fullUserObj = Object.entries(currUsers)
+            fullUserObj = fullUserObj.filter(item => item[1].Name === newClientName)
+            setNewClinetUID(fullUserObj[0][0])
         }
     };
     const getLawyerUID = () => {
@@ -77,7 +76,7 @@ const CreateNewCase = ({ currCaseTypeDetails, currUsers, userUID}) => {
             writeNewCase()
             setListenerFlag(false)
         }
-      }, [listenerFlag]);
+    }, [listenerFlag]);
 
     function writeNewCase() {
         const db = getDatabase();
@@ -91,7 +90,7 @@ const CreateNewCase = ({ currCaseTypeDetails, currUsers, userUID}) => {
             Lawyer: newHandlingLawyer,
             LawyerUID: newHandlingLawyerUID,
             Status: 1,
-            Chat: {0: {Role:'General', Message:'צאט חדש'}}
+            Chat: { 0: { Role: 'General', Message: 'צאט חדש' } }
         })
         clearAllFields();
         alert("נוצר תיק חדש")
@@ -110,43 +109,43 @@ const CreateNewCase = ({ currCaseTypeDetails, currUsers, userUID}) => {
             </div>
             {createdNewUser ? <div>
                 <FormControler >
-                <RadioGroup
-                    aria-labelledby="demo-controlled-radio-buttons-group"
-                    name="controlled-radio-buttons-group"
-                    value={existingUser}
-                    onChange={handleExistingUser}
-                >
-                    <label style={{ fontSize: '17px', fontWeight: 'bold', color: '#523A28', marginLeft: '12px' }}>סוג לקוח</label>
-                    <FormControlLabel value="1" control={<Radio />} label="לקוח קיים" />
-                    <FormControlLabel value="0" control={<Radio />} label="לקוח חדש" />
-                </RadioGroup>
-            </FormControler>
+                    <RadioGroup
+                        aria-labelledby="demo-controlled-radio-buttons-group"
+                        name="controlled-radio-buttons-group"
+                        value={existingUser}
+                        onChange={handleExistingUser}
+                    >
+                        <label style={{ fontSize: '17px', fontWeight: 'bold', color: '#523A28', marginLeft: '12px' }}>סוג לקוח</label>
+                        <FormControlLabel value="1" control={<Radio />} label="לקוח קיים" />
+                        <FormControlLabel value="0" control={<Radio />} label="לקוח חדש" />
+                    </RadioGroup>
+                </FormControler>
 
-            {parseInt(existingUser) ?
-                <>
-                    <div style={{ marginTop: '10px' }}>
+                {parseInt(existingUser) ?
+                    <>
+                        <div style={{ marginTop: '10px' }}>
 
-                        <label style={{ fontSize: '17px', fontWeight: 'bold', color: '#523A28', marginLeft: '12px' }}>לקוח</label>
-                        <Select
-                            sx={{ width: '20%', height: '45px', borderRadius: '4px', border: '1px solid rgb(208, 180, 159)' }}
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={newClientName}
-                            label="לקוח"
-                            onChange={handleNewClinetName}
+                            <label style={{ fontSize: '17px', fontWeight: 'bold', color: '#523A28', marginLeft: '12px' }}>לקוח</label>
+                            <Select
+                                sx={{ width: '20%', height: '45px', borderRadius: '4px', border: '1px solid rgb(208, 180, 159)' }}
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={newClientName}
+                                label="לקוח"
+                                onChange={handleNewClinetName}
 
-                        >
-                            {usersList.map((usr, index) => (<MenuItem key={index} value={usr.Name}>{usr.Name}</MenuItem>))}
-                        </Select>
-                    </div>
-                </>
-                :
-                <><AddUser userType={'Client'} handleNewClinetName={setNewClinetName} setNewClinetUID={setNewClinetUID} setCreatedNewUser={setCreatedNewUser}/></>
-            }
+                            >
+                                {usersList.map((usr, index) => (<MenuItem key={index} value={usr.Name}>{usr.Name}</MenuItem>))}
+                            </Select>
+                        </div>
+                    </>
+                    :
+                    <><AddUser userType={'Client'} handleNewClinetName={setNewClinetName} setNewClinetUID={setNewClinetUID} setCreatedNewUser={setCreatedNewUser} /></>
+                }
             </div>
-            :
-            <></>}
-            
+                :
+                <></>}
+
             <div>
                 <input type='text'
                     disabled
@@ -177,9 +176,6 @@ const CreateNewCase = ({ currCaseTypeDetails, currUsers, userUID}) => {
             <div>
                 <button onClick={onCreateNewCase} className="btn-casetype" style={{ marginTop: '20px', width: '33%' }}>הוסף תיק</button>
             </div>
-
-
-
         </div>
     )
 }

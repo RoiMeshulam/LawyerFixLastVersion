@@ -19,18 +19,11 @@ const AddUser = (props) => {
     const handleNewLawyerPassword = (event) => {
         setNewLawyerPassword(event.target.value);
     };
-    // const handleNewStrongPassword = (event) => {
-    //     setNewStrongPassword(event.target.value);
-    // };
+
     const clearAllFields = () => {
         setNewLawyerUsername('');
         setNewLawyerName('');
         setNewLawyerPassword('');
-        // setNewStrongPassword('');
-        console.log(newLawyerUsername)
-        console.log(newLawyerName)
-        console.log(newLawyerPassword)
-        // console.log(newStrongPassword)
     };
 
 

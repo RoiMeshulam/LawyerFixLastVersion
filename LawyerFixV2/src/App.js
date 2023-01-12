@@ -1,9 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import ClientSearch from './componenets/ClientSearch';
-import LawyerLogin from './componenets/LawyerLogin';
-import NewLogin from './componenets/NewLogin';
-import ClientReq from './componenets/ClientReq'
+import LoginComp from './componenets/LoginComp';
 import Logo from './componenets/Logo';
 import LawyerDashboard from './componenets/LawyerDashboard';
 import ClientDashboard from './componenets/ClientDashboard';
@@ -15,17 +12,13 @@ function App() {
 
   return (
     <div className='Lawyer-background'>
-      
-
       <Logo/>
-
       <div>
-      { !Connected && <LawyerLogin setConnected={setConnected} setloginType={setloginType} setUserUID={setUserUID}/>}
-        {loginType ==="Lawyer" && <LawyerDashboard userUID={userUID} loginType={loginType}/>}
-        {loginType === "User" && <ClientDashboard userUID={userUID} loginType={loginType}/> }
-        {loginType === "Admin" && <LawyerDashboard userUID={userUID} loginType={loginType}/>}
+      { !Connected && <LoginComp setConnected={setConnected} setloginType={setloginType} setUserUID={setUserUID}/>}
+        {loginType ==="Lawyer" && <LawyerDashboard userUID={userUID} loginType={loginType} setConnected={setConnected} setUserUID={setUserUID} setloginType={setloginType}/>}
+        {loginType === "User" && <ClientDashboard userUID={userUID} loginType={loginType} setConnected={setConnected} setUserUID={setUserUID} setloginType={setloginType}/> }
+        {loginType === "Admin" && <LawyerDashboard userUID={userUID} loginType={loginType} setConnected={setConnected} setUserUID={setUserUID} setloginType={setloginType}/>}
       </div>
-      
     </div> 
   );
 }

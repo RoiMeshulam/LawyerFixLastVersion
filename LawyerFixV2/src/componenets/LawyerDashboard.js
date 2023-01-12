@@ -5,11 +5,10 @@ import Grid from '@mui/material/Grid';
 import Item from '@mui/material/Grid';
 import Navigation from './Navigation';
 import PreviewComp from './PreviewComp';
+import UserView from './UserView';
 
 
-
-
-const LawyerDashboard = ({userUID, loginType}) => {
+const LawyerDashboard = ({userUID, loginType, setConnected, setUserUID, setloginType}) => {
 
   // const previewComponent
   
@@ -24,12 +23,7 @@ const LawyerDashboard = ({userUID, loginType}) => {
   const [myCases,setMyCases]= React.useState([])
   const [myActiveCases,setMyActiveCases]= React.useState([])
   const [myRequests,setMyRequestsCases]= React.useState([])
-
-
-
-  console.log(userUID)
-
-
+  const [myUserName,setMyUserName]= React.useState([])
 
   //OnClick in Navigation conponent -> change the previewIndex 
   const changeIndex = (e,index) => {
@@ -39,6 +33,7 @@ const LawyerDashboard = ({userUID, loginType}) => {
 
   return (
     <div>
+      <UserView myUserName={myUserName} setConnected={setConnected} setUserUID={setUserUID} setloginType={setloginType} />
         <Grid container spacing={1} >
             <Grid item xs={9}>
               <Item>
@@ -47,7 +42,7 @@ const LawyerDashboard = ({userUID, loginType}) => {
             </Grid>
             <Grid item xs={3}>
               <Item>
-                <Navigation userUID={userUID} onClick={changeIndex} renderAllCases={renderAllCases} setRenderAllCases={setRenderAllCases} loginType={loginType} setAllUsers={setAllUsers} setAllCases={setAllCases} setAllCaseTypes={setAllCaseTypes} setAllClientReq={setAllClientReq} setAllLawyers={setAllLawyers} setActiveCases={setActiveCases} setMyCases={setMyCases} setMyActiveCases={setMyActiveCases} setMyRequestsCases={setMyRequestsCases}/>
+                <Navigation userUID={userUID} onClick={changeIndex} renderAllCases={renderAllCases} setMyUserName={setMyUserName} setRenderAllCases={setRenderAllCases} loginType={loginType} setAllUsers={setAllUsers} setAllCases={setAllCases} setAllCaseTypes={setAllCaseTypes} setAllClientReq={setAllClientReq} setAllLawyers={setAllLawyers} setActiveCases={setActiveCases} setMyCases={setMyCases} setMyActiveCases={setMyActiveCases} setMyRequestsCases={setMyRequestsCases}/>
               </Item>
             </Grid>
           </Grid>

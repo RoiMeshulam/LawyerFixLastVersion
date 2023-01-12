@@ -26,10 +26,10 @@ import NewMessage from './NewMessage';
 
 const DialogR = styled(Dialog)({
 
-  ".MuiPaper-root":{
-    direction:'rtl'
+  ".MuiPaper-root": {
+    direction: 'rtl'
   }
-  })
+})
 
 const FormControler = styled(FormControl)({
 
@@ -45,19 +45,18 @@ const QuickChanges = (props) => {
   const [openChat, setOpenChat] = React.useState(false);
   const [currStage, setCurrStage] = React.useState(props.currCaseDetails.CurrStage);
   const [statusValue, setStatusValue] = React.useState(props.currCaseDetails.Status);
-  const [messages,setMessages] = React.useState(props.currCaseDetails.Chat)
-  const [newLaywerMessage , setNewLaywerMessage] = useState('');
-
-useEffect(() => {
-  console.log('mess in useEffect')
-  if(newLaywerMessage !== '') {
-    console.log(newLaywerMessage)
-    writeMessage()
-    console.log('mess in if')
-    setMessages([...messages, newLaywerMessage])
-    setNewLaywerMessage('')
-  }
-},[newLaywerMessage])
+  const [messages, setMessages] = React.useState(props.currCaseDetails.Chat)
+  const [newLaywerMessage, setNewLaywerMessage] = useState('');
+  useEffect(() => {
+    console.log('mess in useEffect')
+    if (newLaywerMessage !== '') {
+      console.log(newLaywerMessage)
+      writeMessage()
+      console.log('mess in if')
+      setMessages([...messages, newLaywerMessage])
+      setNewLaywerMessage('')
+    }
+  }, [newLaywerMessage])
 
   const handleChangeStatus = (event) => {
     setStatusValue(event.target.value);
@@ -79,22 +78,43 @@ useEffect(() => {
     setOpenChat(false);
   };
 
+  const tryToClearChat = () => {
+    const db = getDatabase();
+    let plaster = 'Cases/' + props.currCaseDetails.CaseNum + '/Chat';
+    remove(ref(db, plaster))
+    set(ref(db, plaster), {
+      0: {
+        Message: "צאט חדש",
+        Role: "General",
+      },
+    })
+    setMessages([{
+      0: {
+        Message: "צאט חדש",
+        Role: "General",
+      },
+    }
+    ])
+  }
+
   const writeMessage = () => {
     const db = getDatabase();
-    let plaster = 'Cases/' + props.currCaseDetails.CaseNum+ '/Chat';
+    let plaster = 'Cases/' + props.currCaseDetails.CaseNum + '/Chat';
     const len = messages.length
     update(ref(db, plaster), {
-        [len]: {Role: newLaywerMessage.Role , Message: newLaywerMessage.Message}
+      [len]: { Role: newLaywerMessage.Role, Message: newLaywerMessage.Message }
     })
     // setNewLaywerMessage({Role:'Lawyer', Message:'הודעה חדשה לבדיקה'})
   }
+
 
 
   const randomLog = () => {
     console.log("Hello World");
   };
   const caseTypeList = Object.entries(props.currCaseTypeDetails)
-  const temp = caseTypeList.filter(item => item[0] == props.currCaseDetails.CaseType)
+  const temp = caseTypeList
+  const temp2 = temp.filter(item => item[0] == props.currCaseDetails.CaseType)
   console.log(temp)
   function removeCase() {
     const db = getDatabase();
@@ -106,35 +126,45 @@ useEffect(() => {
     const db = getDatabase();
     let plaster = 'Cases/' + props.currCaseDetails.CaseNum;
     update(ref(db, plaster), {
-        CurrStage: Number(currStage),
-        Status: Number(statusValue),
+      CurrStage: Number(currStage),
+      Status: Number(statusValue),
     })
     handleCloseQuickEdit()
+    props.setRenderAllCases(true)
     alert("תיק עודכן בהצלחה")
   }
 
-
- 
-  console.log({messages})
+  console.log({ messages })
   return (
     <div>
-       {props.loginType !== "User" &&
-      <Tooltip title="ערוך תיק">
-        <Fab color='#523A28' aria-label="edit" onClick={handleOpenQuickEdit} style={{marginLeft:'10px'}}>
-          <EditIcon />
-        </Fab>
-      </Tooltip>}
       {props.loginType !== "User" &&
-      <Tooltip title="מחק תיק">
-        <Fab color='#523A28' aria-label="remove" onClick={removeCase} style={{marginLeft:'10px'}}>
-          <DeleteIcon />
-        </Fab>
-      </Tooltip>}
-      <Tooltip title="הודעות">
-        <Fab color='#523A28' aria-label="massages" onClick={handleOpenChat} >
-          <ChatIcon />
-        </Fab>
-      </Tooltip>
+        <Tooltip title="ערוך תיק">
+          <Fab color='#523A28' aria-label="edit" onClick={handleOpenQuickEdit} style={{ marginLeft: '10px' }}>
+            <EditIcon />
+          </Fab>
+        </Tooltip>}
+      {props.loginType !== "User" &&
+        <Tooltip title="מחק תיק">
+          <Fab color='#523A28' aria-label="remove" onClick={removeCase} style={{ marginLeft: '10px' }}>
+            <DeleteIcon />
+          </Fab>
+        </Tooltip>}
+      {props.currCaseDetails.Chat[props.currCaseDetails.Chat.length - 1].Role === 'Lawyer' && props.loginType === 'User' ||
+        props.currCaseDetails.Chat[props.currCaseDetails.Chat.length - 1].Role === 'Client' && props.loginType === 'Lawyer' ||
+        props.currCaseDetails.Chat[props.currCaseDetails.Chat.length - 1].Role === 'Client' && props.loginType === 'Admin' ?
+        <Tooltip title="הודעה חדשה">
+          <Fab color='error' aria-label="massages" onClick={handleOpenChat} >
+            <ChatIcon />
+          </Fab>
+        </Tooltip>
+        :
+        <Tooltip title="הודעות">
+          <Fab color='#523A28' aria-label="massages" onClick={handleOpenChat} >
+            <ChatIcon />
+          </Fab>
+        </Tooltip>
+      }
+
 
       <DialogR open={openQuickEdit} onClose={handleCloseQuickEdit}>
         <DialogTitle>עריכה מהירה</DialogTitle>
@@ -184,7 +214,12 @@ useEffect(() => {
               label="שלב נוכחי"
               onChange={handleNewCurrStage}
             >
-              {/* {temp[0][1].map((stage, index) => (<MenuItem key={index} value={index}>{index}</MenuItem>))} */}
+              {
+                temp2.length > 0 ?
+                  temp2[0][1].map((stage, index) => (<MenuItem key={index} value={index}>{index}</MenuItem>))
+                  : <></>
+              }
+
             </Select>
           </div>
 
@@ -212,30 +247,35 @@ useEffect(() => {
       <DialogR open={openChat} onClose={handleCloseChat}>
         <DialogTitle>צא'ט</DialogTitle>
         <DialogContent>
-        {     
-               messages.length > 1 ? 
-                messages.map((message)=>(
-                  console.log(message.Role),
-                  console.log(message.message),
-                  <Message name={message.Role} text={message.Message}/>
-                  
-                ))
+          {
+            messages.length > 1 ?
+              messages.map((message) => (
+                console.log(message.Role),
+                console.log(message.message),
+                <Message name={message.Role} text={message.Message} />
+
+              ))
 
 
-                : <p>אין הודעות זמינות</p>
-              
-              
-                
-            }
-            {<div>
-              <NewMessage setNewLaywerMessage={setNewLaywerMessage} loginType={props.loginType}/>
-            </div>
-              
-              }
+              : <p>אין הודעות זמינות</p>
+
+
+
+          }
+          {<div>
+            <NewMessage setNewLaywerMessage={setNewLaywerMessage} loginType={props.loginType} />
+          </div>
+
+          }
 
         </DialogContent>
         <DialogActions>
-          <Button >נקה צא'ט</Button>
+          {props.loginType === 'User' ?
+            <></>
+            :
+            <Button onClick={tryToClearChat}>נקה צא'ט</Button>
+          }
+
         </DialogActions>
       </DialogR>
 

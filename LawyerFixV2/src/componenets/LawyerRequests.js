@@ -1,6 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
@@ -9,17 +7,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-
-import { onValue, ref , set,getDatabase,child,get} from "firebase/database";
-import { display } from '@mui/system';
 import styled from '@emotion/styled';
 import TableDescription from './TableDescription';
-import Message from './Message';
-
 
 const Container = styled(Collapse)({
 
@@ -73,15 +65,12 @@ function Row(props) {
           
         </TableRow>
         <TableRow>
-          {/* <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}> */}
             <Container in={open} timeout="auto" unmountOnExit>
             {    
               d.map((message)=>(
                 console.log(message.Role),
                 console.log(message.Message),
-                <TableDescription index={message.Role} text={message.message}/>
-                // <Message name={message.Role} text={message.Message}/>
-          
+                <TableDescription index={message.Role} text={message.message}/>          
               ))
                 
             }
@@ -104,7 +93,6 @@ function Row(props) {
 
 const LawyerRequests = (props) => {
     let requestID = -1
-    // make Requests like what i need
     console.log("LawyerRequests")
     console.log(props.previewRequests)
 
@@ -127,7 +115,6 @@ const LawyerRequests = (props) => {
                 requestID= requestID+1,
                 console.log("key check:"+requestID),
                 console.log(request),
-                // <Row key={requestID} request={request} handlingLawyer={props.handlingLawyer}/> 
                 <Row setRenderAllCases={props.setRenderAllCases} key={requestID} request={request} handlingLawyer={props.handlingLawyer}/> 
               ))
               }

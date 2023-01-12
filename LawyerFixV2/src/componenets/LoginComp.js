@@ -1,15 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
-import Button from '@mui/material/Button'
 import { TextField } from '@mui/material';
-import LawyerDashboard from './LawyerDashboard';
 import {signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { getDatabase, ref, child, get } from "firebase/database";
 
 
 
-const LawyerLogin = ({setConnected, setloginType, setUserUID}) => {
+const LoginComp = ({setConnected, setloginType, setUserUID}) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const handleUserName = (event) => {
@@ -47,7 +45,6 @@ const LawyerLogin = ({setConnected, setloginType, setUserUID}) => {
     }
   }, [true])
 
-
   const OnLoginClick = () => {
     GetLogin(userName, password)
   };
@@ -63,4 +60,4 @@ const LawyerLogin = ({setConnected, setloginType, setUserUID}) => {
   )
 }
 
-export default LawyerLogin
+export default LoginComp
