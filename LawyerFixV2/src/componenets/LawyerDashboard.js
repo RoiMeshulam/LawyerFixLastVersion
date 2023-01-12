@@ -6,6 +6,7 @@ import Item from '@mui/material/Grid';
 import Navigation from './Navigation';
 import PreviewComp from './PreviewComp';
 import UserView from './UserView';
+import UpperView from './UpperView';
 
 
 const LawyerDashboard = ({userUID, loginType, setConnected, setUserUID, setloginType}) => {
@@ -33,7 +34,12 @@ const LawyerDashboard = ({userUID, loginType, setConnected, setUserUID, setlogin
 
   return (
     <div>
-      <UserView myUserName={myUserName} setConnected={setConnected} setUserUID={setUserUID} setloginType={setloginType} />
+      
+
+      
+      {/* <UpperView myUserName={myUserName} setConnected={setConnected} setUserUID={setUserUID} setloginType={setloginType}/> */}
+      {/* <UserView myUserName={myUserName} setConnected={setConnected} setUserUID={setUserUID} setloginType={setloginType} /> */}
+      <div>
         <Grid container spacing={1} >
             <Grid item xs={9}>
               <Item>
@@ -42,10 +48,11 @@ const LawyerDashboard = ({userUID, loginType, setConnected, setUserUID, setlogin
             </Grid>
             <Grid item xs={3}>
               <Item>
-                <Navigation userUID={userUID} onClick={changeIndex} renderAllCases={renderAllCases} setMyUserName={setMyUserName} setRenderAllCases={setRenderAllCases} loginType={loginType} setAllUsers={setAllUsers} setAllCases={setAllCases} setAllCaseTypes={setAllCaseTypes} setAllClientReq={setAllClientReq} setAllLawyers={setAllLawyers} setActiveCases={setActiveCases} setMyCases={setMyCases} setMyActiveCases={setMyActiveCases} setMyRequestsCases={setMyRequestsCases}/>
+                <Navigation  myUserName={myUserName} setConnected={setConnected} setUserUID={setUserUID} setloginType={setloginType} userUID={userUID} onClick={changeIndex} renderAllCases={renderAllCases} setMyUserName={setMyUserName} setRenderAllCases={setRenderAllCases} loginType={loginType} setAllUsers={setAllUsers} setAllCases={setAllCases} setAllCaseTypes={setAllCaseTypes} setAllClientReq={setAllClientReq} setAllLawyers={setAllLawyers} setActiveCases={setActiveCases} setMyCases={setMyCases} setMyActiveCases={setMyActiveCases} setMyRequestsCases={setMyRequestsCases} />
               </Item>
             </Grid>
           </Grid>
+        </div>
     </div>
 
   )

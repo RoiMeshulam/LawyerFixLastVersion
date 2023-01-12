@@ -1,10 +1,10 @@
 import React from 'react'
-import logo1 from '../pic/logo.PNG' 
+import logo1 from '../pic/logoNew.png' 
 
 const Logo = () => {
   return (
-    <div className='logo'>
-        <img src={logo1} className="logo" />
+    <div className="logo-Login">
+        <img src={logo1} className="logo-Login" />
     </div>
     
   )

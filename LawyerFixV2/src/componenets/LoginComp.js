@@ -48,7 +48,7 @@ const LoginComp = ({setConnected, setloginType, setUserUID}) => {
   };
   
   return (
-        <div className='container' style={{justifyContent:'center', display:'grid'}}>
+        <div style={{justifyContent:'center', display:'grid' ,direction:'rtl'}}>
           <TextField  sx={{input: {textAlign: "center"}}} id="filled-basic" label='מייל' onChange={handleUserName} variant="filled" />
           <TextField id="outlined-password-input" label='סיסמא' onChange={handlePassword} variant="filled" type="password"  style={{marginTop:'20px'}}/>
           <div>

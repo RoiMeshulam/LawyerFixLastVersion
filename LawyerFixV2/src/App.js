@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className='Lawyer-background'>
-      <Logo/>
+      { !Connected && <Logo/>}
       <div>
       { !Connected && <LoginComp setConnected={setConnected} setloginType={setloginType} setUserUID={setUserUID}/>}
         {loginType ==="Lawyer" && <LawyerDashboard userUID={userUID} loginType={loginType} setConnected={setConnected} setUserUID={setUserUID} setloginType={setloginType}/>}

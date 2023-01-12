@@ -11,9 +11,9 @@ const UserView = (props) => {
     return (
         <div>
             {props.myUserName ?
-                <p>Hello {props.myUserName.Name}</p>
+                <p> {props.myUserName.Name} שלום</p>
                 :
-                <p>Hello</p>
+                <p>שלום</p>
             }
             <Tooltip color='error' title="התנתק">
                 <Fab onClick={logOutFromUser} color='error' aria-label="Logout">

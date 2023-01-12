@@ -333,3 +333,27 @@ footer {
   font-weight: bold;
   border-radius: 20px;
 }
+
+.logo-Login{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  padding-top: 20px;
+}
+
+.UserView{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.logo-dash{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  margin-bottom: 18px;
+}

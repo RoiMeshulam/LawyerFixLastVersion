@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { onValue, ref, set, getDatabase, child, get } from "firebase/database";
+import LogoDashboard from './LogoDashboard';
+import UserView from './UserView';
 
 const Navigation = (props) => {
     const [defaultScreen, setDefaultScreen] = useState(true);
@@ -88,7 +90,20 @@ const Navigation = (props) => {
 
 
     return (
+
+
+
         <div className='container-btn'>
+           
+            <div className='UserView'>
+                 <UserView myUserName={props.myUserName} setConnected={props.setConnected} setUserUID={props.setUserUID} setloginType={props.setloginType}/>
+            </div>
+            <div>
+                <LogoDashboard/>
+                
+            </div>
+
+
             <button className="btn-group" onClick={(e) => {
                 props.onClick(e, 0)
                 GetAllCasesFromDB()
