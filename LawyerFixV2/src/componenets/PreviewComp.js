@@ -11,9 +11,10 @@ import PreviewTable from './PreviewTable'
 
 
 const PreviewComp = (props) => {
-  const [previewIndex, setPreviewIndex] = React.useState(0);
-  const [previewCases, setPreviewCases] = React.useState(props.allCases);
+  const [previewIndex, setPreviewIndex] = React.useState(2);
+  const [previewCases, setPreviewCases] = React.useState(props.myCases);
   const [searchCases, setSearchCases] = React.useState([])
+  const [firstConnected , setFirstConnected]= React.useState(true)
 
   //OnClick in Navigation conponent -> change the previewIndex 
   const changeIndex = (e, index) => {
@@ -22,9 +23,9 @@ const PreviewComp = (props) => {
   }
 
   useEffect(() => {
-    setPreviewCases(props.allCases)
+    setPreviewCases(props.myCases)
 
-  }, [props.allCases])
+  }, [props.myCases])
 
 
 

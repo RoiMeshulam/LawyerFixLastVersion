@@ -68,6 +68,22 @@ const NavigateTable = (props) => {
   return (
     <div>
         <div style={{marginBottom:'15px'}}>
+            <button className={props.previewIndex==2 ? "btn-clicked" : "btn-not-clicked"} onClick={(e) => {
+                props.onClick(e, 2)
+                props.setPreviewCases(props.myCases)
+            }
+            }>
+                התיקים שלי
+            </button>
+            <button className={props.previewIndex==3 ? "btn-clicked" : "btn-not-clicked"} onClick={(e) => {
+                props.onClick(e, 3)
+                props.setPreviewCases(props.myActiveCases)
+            }
+            }>
+                התיקים הפעילים שלי
+            </button>
+
+
             {props.loginType === "Admin" &&
             <button className={props.previewIndex==0 ? "btn-clicked" : "btn-not-clicked"} onClick={(e) => {
                     props.onClick(e, 0)  
@@ -85,20 +101,7 @@ const NavigateTable = (props) => {
                 }>
                     כל התיקים הפעילים
                 </button>}
-                <button className={props.previewIndex==2 ? "btn-clicked" : "btn-not-clicked"} onClick={(e) => {
-                    props.onClick(e, 2)
-                    props.setPreviewCases(props.myCases)
-                }
-                }>
-                    התיקים שלי
-                </button>
-                <button className={props.previewIndex==3 ? "btn-clicked" : "btn-not-clicked"} onClick={(e) => {
-                    props.onClick(e, 3)
-                    props.setPreviewCases(props.myActiveCases)
-                }
-                }>
-                    התיקים הפעילים שלי
-                </button>
+               
 
 
 
