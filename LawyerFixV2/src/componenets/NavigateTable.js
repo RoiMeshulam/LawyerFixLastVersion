@@ -4,14 +4,9 @@ import Search from './Search'
 const NavigateTable = (props) => {
 
     const searchCases = (e,searchInput) => {
-        console.log("searchCases")
-        console.log(searchInput)
         e.preventDefault();
-        console.log(props.previewIndex)
         if(props.previewIndex===0){
-            console.log("cond 0")
             const temp = props.allCases
-            console.log(temp)
             const casesByName = temp.filter(item => item.ClientName === searchInput)
             const casesByCaseNum = temp.filter(item => item.CaseNum === searchInput)
             if(casesByName.length > 0 ){
@@ -25,9 +20,7 @@ const NavigateTable = (props) => {
             }
         } 
         else if(props.previewIndex===1){
-            console.log("cond 1")
             const temp = props.activeCases
-            console.log(temp)
             const casesByName = temp.filter(item => item.ClientName === searchInput)
             const casesByCaseNum = temp.filter(item => item.CaseNum === searchInput)
             if(casesByName.length > 0 ){
@@ -41,9 +34,7 @@ const NavigateTable = (props) => {
             }
         }
         else if(props.previewIndex===2){
-            console.log("cond 2")
             const temp = props.myCases
-            console.log(temp)
             const casesByName = temp.filter(item => item.ClientName === searchInput)
             const casesByCaseNum = temp.filter(item => item.CaseNum === searchInput)
             if(casesByName.length > 0 ){
@@ -57,9 +48,7 @@ const NavigateTable = (props) => {
             }
         }
         else{
-            console.log("cond 3")
             const temp = props.myActiveCases
-            console.log(temp)
             const casesByName = temp.filter(item => item.ClientName === searchInput)
             const casesByCaseNum = temp.filter(item => item.CaseNum === searchInput)
             if(casesByName.length > 0 ){

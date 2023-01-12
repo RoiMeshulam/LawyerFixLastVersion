@@ -26,20 +26,11 @@ function Row(props) {
     
     const { request , handlingLawyer} = props;
     const [open, setOpen] = React.useState(false);
-    
-    console.log("in row check what is request")
-    console.log(request)
-    
     const row = request[1]
-    let ChatID = -1
-    
+    let ChatID = -1 
     const b = request.Chat
-    console.log(b)
-    console.log("mappppppp")
     const c = Object.entries(b)
-    console.log(c)
     const d= c.map((item)=>(item[1]))
-    console.log(d)
 
     
     return (
@@ -68,8 +59,6 @@ function Row(props) {
             <Container in={open} timeout="auto" unmountOnExit>
             {    
               d.map((message)=>(
-                console.log(message.Role),
-                console.log(message.Message),
                 <TableDescription index={message.Role} text={message.message}/>          
               ))
                 
@@ -93,8 +82,6 @@ function Row(props) {
 
 const LawyerRequests = (props) => {
     let requestID = -1
-    console.log("LawyerRequests")
-    console.log(props.previewRequests)
 
 
     return (
@@ -113,8 +100,6 @@ const LawyerRequests = (props) => {
               {    
               props.Requests.map((request) => (   
                 requestID= requestID+1,
-                console.log("key check:"+requestID),
-                console.log(request),
                 <Row setRenderAllCases={props.setRenderAllCases} key={requestID} request={request} handlingLawyer={props.handlingLawyer}/> 
               ))
               }

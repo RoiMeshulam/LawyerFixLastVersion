@@ -8,7 +8,6 @@ const NewMessage = (props) => {
     const [inputValue, setInputValue] = React.useState('');
 
     const updateMessage = () => {
-        console.log(inputValue)
         if(props.loginType === 'User'){
             props.setNewLaywerMessage({Role:'Client' ,Message:inputValue})
         }

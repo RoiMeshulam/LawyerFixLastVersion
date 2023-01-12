@@ -58,7 +58,6 @@ const Navigation = (props) => {
             const dbRef = ref(getDatabase());
             get(child(dbRef, `CaseType/`)).then((snapshot) => {
                 if (snapshot.exists()) {
-                    console.log(snapshot.val());
                     props.setAllCaseTypes(snapshot.val());
                 } else {
                     console.log("No data available");
@@ -72,7 +71,6 @@ const Navigation = (props) => {
 
 
     if (defaultScreen) {
-        console.log("defaultscreenn")
         GetAllCasesFromDB()
         GetAllCaseTypeFromDB()
         GetAllUsersFromDB()
@@ -84,7 +82,6 @@ const Navigation = (props) => {
             GetAllCasesFromDB()
             GetAllCaseTypeFromDB()
             GetAllUsersFromDB()
-            console.log("I've rendered it")
             props.setRenderAllCases(false)
         }
     }, [props.renderAllCases]);

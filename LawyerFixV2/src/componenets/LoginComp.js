@@ -19,8 +19,6 @@ const LoginComp = ({setConnected, setloginType, setUserUID}) => {
 
   const GetLogin = React.useCallback((user_name, Password) => {
     if (true) {
-      console.log(user_name)
-      console.log(Password)
       signInWithEmailAndPassword(auth, user_name, Password)
         .then((userCredential) => {
           // Signed in 

@@ -35,7 +35,6 @@ function Row(props) {
   
     //filter cases type to descriptions
     let descriptionKey=0
-    console.log(casesTypes)
     const casesTypeprop = casesTypes
     let Descriptions=[]
     const b = Object.entries(casesTypeprop)
@@ -69,18 +68,12 @@ function Row(props) {
         <TableCell align="right">{row.CaseType}</TableCell>
         <TableCell align="right">{row.CurrStage}</TableCell>
         <TableCell align="right"> {<QuickChanges setRenderAllCases={setRenderAllCases} CaseNum={row.CaseNum} currCaseDetails={row} currCaseTypeDetails={casesTypes} loginType={loginType}/>} </TableCell>
-        {/* <TableCell align="right"> סתם מלל </TableCell> */}
       </TableRow>
       <TableRow>
         
           <Container in={open} timeout="auto" unmountOnExit>
-            {console.log("Descriptions")}
-            {console.log(Descriptions.length)}
-            
-
              {
                 Descriptions.length>0 ? Descriptions.map((description) => (
-                  console.log(description),
                   descriptionKey=descriptionKey+1 ,
                   <TableDescription index ={descriptionKey} text={description}/>
                   
@@ -105,9 +98,7 @@ export default function CollapsibleTable(props) {
   // 0--> תיקים פעילים
   // 1--> כל התיקים
   let index = -1
-  console.log("כל סוגי התיקים 2")
-  console.log(props.casesType)
-    
+
         return (
             <TableContainer component={Paper}>
               <Table aria-label="collapsible table">
@@ -126,7 +117,6 @@ export default function CollapsibleTable(props) {
                   {
                    
                  props.cases.map((row) => (
-                    console.log(row),
                     index=index+1,
                     <Row key={row.CaseNum} row={row} casesTypes={props.casesType} setRenderAllCases={props.setRenderAllCases} index={index} loginType={props.loginType}/>
                   ))

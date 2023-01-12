@@ -35,8 +35,6 @@ const AddUser = (props) => {
             return
         }
         if (true) {
-            console.log(newLawyerUsername)
-            console.log(newLawyerPassword)
             createUserWithEmailAndPassword(auth, newLawyerUsername, newLawyerPassword)
                 .then((userCredential) => {
                     const user = userCredential.user;

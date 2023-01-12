@@ -20,7 +20,6 @@ const EditCase = ({ allCases, currCaseTypeDetails }) => {
     };
     const FilterCurrCase = () => {
         const temp = allCases.filter(item => item.CaseNum == caseId)
-        console.log(temp)
         setCurrCaseDetails(temp[0]);
         if (temp) {
             handleOpenCaseDetails();

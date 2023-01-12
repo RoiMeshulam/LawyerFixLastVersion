@@ -18,7 +18,6 @@ const CreateNewCaseType = () => {
         listCpt.push(Stage)
         SetStageList(listCpt)
         SetStageIndex(StageIndex + 1)
-        console.log(StageList)
     }
 
     const onDoneClick = ({ event }) => {
@@ -35,7 +34,6 @@ const CreateNewCaseType = () => {
     };
 
     const handleStage = (event, stageNum) => {
-        console.log("here" + stageNum);
         const listCpt = StageList
         listCpt[stageNum - 1] = event.target.value
         SetStageList(listCpt)

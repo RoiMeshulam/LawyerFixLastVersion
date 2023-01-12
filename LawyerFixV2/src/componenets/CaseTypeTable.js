@@ -1,4 +1,3 @@
-// import React from 'react'
 import * as React from 'react';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -28,11 +27,6 @@ function Row(props) {
   const [open, setOpen] = React.useState(false);
 
   let descriptionKey = 0
-  console.log(descriptions[index])
-
-
-
-
 
   return (
 
@@ -60,7 +54,6 @@ function Row(props) {
           {
 
             descriptions[index].map((description) => (
-              console.log(description),
               descriptionKey = descriptionKey + 1,
               <TableDescription index={descriptionKey} text={description} />
             ))
@@ -90,7 +83,6 @@ const CaseTypeTable = ({ casesType, casesTypeNames }) => {
           {
             casesTypeNames.map((name) => (
               caseTypeKey = caseTypeKey + 1,
-              console.log("key check:" + caseTypeKey),
               <Row key={caseTypeKey} name={name} descriptions={casesType} index={caseTypeKey} />
             ))
           }

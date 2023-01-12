@@ -25,8 +25,6 @@ const ClientDashboard = (props) => {
           //my current username
           const myUsernamevalue = Object.entries(snapshot.val())
           const myUsername = myUsernamevalue.filter(item => item[0] === props.userUID)
-          console.log(myUsernamevalue)
-          console.log(myUserName)
           setMyUserName(myUsername[0][1])
           setAllUsers(snapshot.val());
         } else {
@@ -43,11 +41,8 @@ const ClientDashboard = (props) => {
       const dbRef = ref(getDatabase());
       get(child(dbRef, `Cases/`)).then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
           const b = Object.entries(snapshot.val())
-          console.log(b)
           const c = b.map((item) => item[1])
-          console.log(c)
           const d = c.filter(item => item.ClientUID === props.userUID);
           setAllCases(d)
 

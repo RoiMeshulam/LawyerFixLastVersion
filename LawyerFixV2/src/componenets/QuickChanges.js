@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Fab } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
@@ -8,19 +7,16 @@ import { getDatabase, ref, child, get, set, update, remove } from "firebase/data
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import styled from '@emotion/styled';
 import { Select, MenuItem } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 import Message from './Message';
-import { ContactSupportOutlined } from '@mui/icons-material';
 import NewMessage from './NewMessage';
 
 
@@ -43,16 +39,14 @@ const FormControler = styled(FormControl)({
 const QuickChanges = (props) => {
   const [openQuickEdit, setOpenQuickEdit] = React.useState(false);
   const [openChat, setOpenChat] = React.useState(false);
+  const [openDelDialog, setOpenDelDialog] = React.useState(false);
   const [currStage, setCurrStage] = React.useState(props.currCaseDetails.CurrStage);
   const [statusValue, setStatusValue] = React.useState(props.currCaseDetails.Status);
   const [messages, setMessages] = React.useState(props.currCaseDetails.Chat)
   const [newLaywerMessage, setNewLaywerMessage] = useState('');
   useEffect(() => {
-    console.log('mess in useEffect')
     if (newLaywerMessage !== '') {
-      console.log(newLaywerMessage)
       writeMessage()
-      console.log('mess in if')
       setMessages([...messages, newLaywerMessage])
       setNewLaywerMessage('')
     }
@@ -76,6 +70,13 @@ const QuickChanges = (props) => {
   };
   const handleCloseChat = () => {
     setOpenChat(false);
+  };
+
+  const handleOpenDialogDelete = () => {
+    setOpenDelDialog(true);
+  };
+  const handleCloseDialogDelete = () => {
+    setOpenDelDialog(false);
   };
 
   const tryToClearChat = () => {
@@ -104,18 +105,11 @@ const QuickChanges = (props) => {
     update(ref(db, plaster), {
       [len]: { Role: newLaywerMessage.Role, Message: newLaywerMessage.Message }
     })
-    // setNewLaywerMessage({Role:'Lawyer', Message:'הודעה חדשה לבדיקה'})
   }
 
-
-
-  const randomLog = () => {
-    console.log("Hello World");
-  };
   const caseTypeList = Object.entries(props.currCaseTypeDetails)
   const temp = caseTypeList
   const temp2 = temp.filter(item => item[0] == props.currCaseDetails.CaseType)
-  console.log(temp)
   function removeCase() {
     const db = getDatabase();
     let plaster = 'Cases/' + props.CaseNum;
@@ -134,7 +128,6 @@ const QuickChanges = (props) => {
     alert("תיק עודכן בהצלחה")
   }
 
-  console.log({ messages })
   return (
     <div>
       {props.loginType !== "User" &&
@@ -145,7 +138,7 @@ const QuickChanges = (props) => {
         </Tooltip>}
       {props.loginType !== "User" &&
         <Tooltip title="מחק תיק">
-          <Fab color='#523A28' aria-label="remove" onClick={removeCase} style={{ marginLeft: '10px' }}>
+          <Fab color='#523A28' aria-label="remove" onClick={handleOpenDialogDelete} style={{ marginLeft: '10px' }}>
             <DeleteIcon />
           </Fab>
         </Tooltip>}
@@ -250,24 +243,15 @@ const QuickChanges = (props) => {
           {
             messages.length > 1 ?
               messages.map((message) => (
-                console.log(message.Role),
-                console.log(message.message),
                 <Message name={message.Role} text={message.Message} />
 
               ))
-
-
               : <p>אין הודעות זמינות</p>
-
-
-
           }
           {<div>
             <NewMessage setNewLaywerMessage={setNewLaywerMessage} loginType={props.loginType} />
           </div>
-
           }
-
         </DialogContent>
         <DialogActions>
           {props.loginType === 'User' ?
@@ -275,12 +259,16 @@ const QuickChanges = (props) => {
             :
             <Button onClick={tryToClearChat}>נקה צא'ט</Button>
           }
-
         </DialogActions>
       </DialogR>
 
-
-
+      <DialogR open={openDelDialog} onClose={handleCloseDialogDelete}>
+        <DialogTitle>אתה בטוח שאתה רוצה למחוק תיק זה?</DialogTitle>
+        <DialogActions>
+          <Button onClick={removeCase}>מחק תיק</Button>
+          <Button onClick={handleCloseDialogDelete}>בטל</Button>
+        </DialogActions>
+      </DialogR>
 
     </div >
   )

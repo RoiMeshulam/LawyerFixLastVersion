@@ -15,8 +15,8 @@ const UserView = (props) => {
                 :
                 <p>Hello</p>
             }
-            <Tooltip color='#f44336' title="התנתק">
-                <Fab onClick={logOutFromUser} color='#f44336' aria-label="Logout">
+            <Tooltip color='error' title="התנתק">
+                <Fab onClick={logOutFromUser} color='error' aria-label="Logout">
                     <ExitToAppIcon />
                 </Fab>
             </Tooltip>

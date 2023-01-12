@@ -41,7 +41,6 @@ const PreviewComp = (props) => {
 
   else if (props.preview === 1) {
 
-    console.log(props.allCaseTypes)
     const casesTypeprop = props.allCaseTypes
     const b = Object.entries(casesTypeprop)
     const c = b.map((item) => item[1])
