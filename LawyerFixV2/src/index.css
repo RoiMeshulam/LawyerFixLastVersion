@@ -357,3 +357,9 @@ footer {
   width: 75%;
   margin-bottom: 18px;
 }
+
+.logo-user{
+  display: block;
+  width: 75%;
+  margin-top: 20px;
+}

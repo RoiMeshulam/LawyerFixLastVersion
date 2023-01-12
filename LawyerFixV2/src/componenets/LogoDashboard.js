@@ -1,10 +1,10 @@
 import React from 'react'
 import logo1 from '../pic/LogoDash.png' 
 
-const LogoDashboard = () => {
+const LogoDashboard = (props) => {
   return (
     <div>
-    <img src={logo1} className="logo-dash" />
+    <img src={logo1} className={props.loginType!=='user' ? "logo-dash" : "logo-user"} />
 </div>
   )
 }

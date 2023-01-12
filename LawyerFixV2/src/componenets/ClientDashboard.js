@@ -4,6 +4,7 @@ import '../index.css';
 import PreviewCompClient from './PreviewCompClient';
 import { onValue, ref, set, getDatabase, child, get } from "firebase/database";
 import UserView from './UserView';
+import LogoDashboard from './LogoDashboard';
 
 const ClientDashboard = (props) => {
 
@@ -92,8 +93,16 @@ const ClientDashboard = (props) => {
   return (
 
     <div>
-      <UserView myUserName={myUserName} setConnected={props.setConnected} setUserUID={props.setUserUID} setloginType={props.setloginType} />
-      <PreviewCompClient setRenderAllCases={setRenderAllCases} allCases={allCases} clientReq={allClientReq} allCaseTypes={allCasesType} handlingLawyer={handlingLawyer} allUsers={allUsers} loginType={props.loginType} />
+      <div style={{display:'flex',justifyContent:'space-between'}}>
+        <div style={{textAlign:'center',padding:'45px'}}>
+        <UserView myUserName={myUserName} setConnected={props.setConnected} setUserUID={props.setUserUID} setloginType={props.setloginType} />
+        </div>
+        <div>
+          <LogoDashboard loginType={'user'}/>  
+        </div>
+      </div>
+
+        <PreviewCompClient setRenderAllCases={setRenderAllCases} allCases={allCases} clientReq={allClientReq} allCaseTypes={allCasesType} handlingLawyer={handlingLawyer} allUsers={allUsers} loginType={props.loginType} />
     </div>
 
   )

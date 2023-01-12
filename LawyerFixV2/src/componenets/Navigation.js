@@ -99,7 +99,7 @@ const Navigation = (props) => {
                  <UserView myUserName={props.myUserName} setConnected={props.setConnected} setUserUID={props.setUserUID} setloginType={props.setloginType}/>
             </div>
             <div>
-                <LogoDashboard/>
+                <LogoDashboard loginType={'Lawyer'}/>
                 
             </div>
 
