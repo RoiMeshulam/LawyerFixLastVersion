@@ -22,11 +22,13 @@ const CreateNewCaseType = () => {
 
     const onDoneClick = ({ event }) => {
         writeUserData();
+        alert('סוג התיק ' + CaseType +" נשמר בהצלחה")
         SetStage('')
         SetCaseType('')
         SetStageFormList([])
         SetStageIndex(0)
         SetStageList([])
+       
     }
 
     const handleCaseType = (event) => {
@@ -44,10 +46,15 @@ const CreateNewCaseType = () => {
         set(ref(db, `CaseType/${CaseType}`), {
             1: StageList[0],
         });
+        let j = 1
         for (let i = 1; i < StageList.length; i++) {
-            update(ref(db, `CaseType/${CaseType}`), {
-                [i + 1]: StageList[i],
-            });
+            if(StageList[i].length > 0){
+                update(ref(db, `CaseType/${CaseType}`), {
+                    [j + 1]: StageList[i],
+                });
+                j=j+1
+            } 
+            
 
         }
     }

@@ -44,9 +44,9 @@ function Row(props) {
         <TableCell align="right" component="th" scope="row">
           {props.name}
         </TableCell>
-        <TableCell align="right">
+        {/* <TableCell align="right">
           פעולות
-        </TableCell>
+        </TableCell> */}
 
       </TableRow>
       <TableRow>
@@ -75,7 +75,7 @@ const CaseTypeTable = ({ casesType, casesTypeNames }) => {
           <TableRow>
             <TableCell />
             <TableCell align="right">סוג התיק</TableCell>
-            <TableCell align="right">פעולות</TableCell>
+            {/* <TableCell align="right">פעולות</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>

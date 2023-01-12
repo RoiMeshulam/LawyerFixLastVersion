@@ -75,7 +75,7 @@ function Row(props) {
              {
                 Descriptions.length>0 ? Descriptions.map((description) => (
                   descriptionKey=descriptionKey+1 ,
-                  <TableDescription index ={descriptionKey} text={description}/>
+                  <TableDescription key= {descriptionKey} index ={descriptionKey} text={description}/>
                   
                 ))
                 :

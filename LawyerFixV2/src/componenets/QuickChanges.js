@@ -108,7 +108,7 @@ const QuickChanges = (props) => {
       [len]: { Role: newLaywerMessage.Role, Message: newLaywerMessage.Message }
     })
     props.setRenderAllCases(true) 
-    alert("הודעה נשלחה בהצלחה")
+    
   }
 
   const caseTypeList = Object.entries(props.currCaseTypeDetails)
@@ -132,6 +132,8 @@ const QuickChanges = (props) => {
     props.setRenderAllCases(true)
     alert("תיק עודכן בהצלחה")
   }
+
+  let messageKey=0
 
   return (
     <div>
@@ -248,7 +250,8 @@ const QuickChanges = (props) => {
           {
             messages.length > 1 ?
               messages.map((message) => (
-                <Message name={message.Role} text={message.Message} />
+                messageKey = messageKey+1,
+                <Message key = {messageKey} name={message.Role} text={message.Message} />
 
               ))
               : <p>אין הודעות זמינות</p>
