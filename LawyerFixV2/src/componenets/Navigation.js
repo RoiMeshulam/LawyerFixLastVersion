@@ -52,8 +52,14 @@ const Navigation = (props) => {
     const GetAllUsersFromDB = React.useCallback(() => {
         if (true) {
             const dbRef = ref(getDatabase());
+            //get all users
             get(child(dbRef, `Users/`)).then((snapshot) => {
                 if (snapshot.exists()) {
+                    const myUsernamevalue = Object.entries(snapshot.val())
+                    const myUsername = myUsernamevalue.filter(item => item[0] === props.userUID)
+                    //my personal user
+                    props.setMyUserName(myUsername[0][1])
+                    //rest of the users
                     props.setAllUsers(snapshot.val());
                 } else {
                     console.log("No data available");
@@ -62,7 +68,7 @@ const Navigation = (props) => {
                 console.error(error);
             });
         }
-    }, [true])
+    }, [true])
 
 
     const GetAllCaseTypeFromDB = React.useCallback(() => {
@@ -81,53 +87,21 @@ const Navigation = (props) => {
         }
     }, [true])
 
-    const GetAllClientReqFromDB = React.useCallback(() => {
-        if (true) {
-            const dbRef = ref(getDatabase());
-            get(child(dbRef, `ClientReq/`)).then((snapshot) => {
-                if (snapshot.exists()) {
-                    const b = Object.entries(snapshot.val())
-                    const c = b.filter(item => item[1].LawyerUID === props.userUID)
-
-                    // const allRequests = b.map((item) => item[1])
-                    // const myRequests = c.map((item) => item[1])
-
-                    // console.log(allRequests)
-                    // console.log(myRequests)
-                    // console.log("nav")
-                    console.log("all client requests")
-                    console.log(b)
-                    console.log("my client requests")
-                    console.log(c)
-
-                    props.setAllClientReq(b)
-                    props.setMyRequestsCases(c)
-                    
-
-
-                    
-                } else {
-                    console.log("No data available");
-                }
-            }).catch((error) => {
-                console.error(error);
-            });
-        }
-    }, [true])
+  
 
     if (defaultScreen) {
         console.log("defaultscreenn")
         GetAllCasesFromDB()
-        GetAllClientReqFromDB()
         GetAllCaseTypeFromDB()
+        GetAllUsersFromDB()
         setDefaultScreen(false)
     }
 
     useEffect(() => {
         if (props.renderAllCases) {
             GetAllCasesFromDB()
-            GetAllClientReqFromDB()
             GetAllCaseTypeFromDB()
+            GetAllUsersFromDB()
             console.log("I've rendered it")
             props.setRenderAllCases(false)
         }
@@ -177,7 +151,7 @@ const Navigation = (props) => {
             }>
                 יצירת סוג תיק חדש
             </button>
-            <button className="btn-group" onClick={(e) => {
+            {/* <button className="btn-group" onClick={(e) => {
                 props.onClick(e, 4)
                 GetAllCasesFromDB()
                 GetAllCaseTypeFromDB()
@@ -185,8 +159,8 @@ const Navigation = (props) => {
             }
             }>
                 עריכת תיק קיים
-            </button>
-
+            </button> */}
+             {props.loginType === "Admin" &&
             <hr
                 style={{
                     background: '#D0B49F',
@@ -194,7 +168,7 @@ const Navigation = (props) => {
                     height: '3px',
                     width: '100%'
                 }}
-            />
+            />}
             {props.loginType === "Admin" &&
                 <button className="btn-group" onClick={(e) =>
                     props.onClick(e, 5)}>

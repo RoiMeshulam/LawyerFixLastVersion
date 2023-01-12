@@ -298,3 +298,38 @@ footer {
 
 
 }
+
+.btn-clicked {
+  display: inline-block;
+  background: white;
+  color: #523A28;
+  border: 2px solid;
+  border-color: #523A28;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: cursive;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+
+.btn-not-clicked {
+  display: inline-block;
+  background: #523A28;
+  color: white;
+  border: none;
+  border-color: #D0B49F;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: cursive;
+  font-weight: bold;
+  border-radius: 20px;
+}
